@@ -12,12 +12,20 @@ bool R1(int R, int G, int B) {
 
 
 bool R2(float Y, float Cr, float Cb) {
-	bool e3 = Cr <= 1.5862*Cb + 20;
+	/*bool e3 = Cr <= 1.5862*Cb + 20;
 	bool e4 = Cr >= 0.3448*Cb + 76.2069;
 	bool e5 = Cr >= -4.5652*Cb + 234.5652;
 	bool e6 = Cr <= -1.15*Cb + 301.75;
 	bool e7 = Cr <= -2.2857*Cb + 432.85;
-	return e3 && e4 && e5 && e6 && e7;
+	return e3 && e4 && e5 && e6 && e7;*/
+	Cb -= 109;
+	Cr -= 152;
+	double x1 = (819 * Cr - 614 * Cb) / 32 + 51;
+	double y1 = (819 * Cr + 614 * Cb) / 32 + 77;
+	x1 = x1 * 41 / 1024;
+	y1 = y1 * 73 / 1024;
+	double value = x1 * x1 + y1 * y1;
+	return ((Y < 100) && (value < 700)) || ((Y >= 100) && (value < 850));
 }
 
 bool R3(float H, float S, float V) {
@@ -69,7 +77,7 @@ Mat GetSkin(Mat const &src) {
 			// apply hsv rule
 			bool c = R3(H, S, V);
 
-			if (!(a&&c))
+			if (!(b&&c))
 				dst.ptr<Vec3b>(i)[j] = cblack;
 		}
 	}
