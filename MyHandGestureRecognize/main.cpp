@@ -5,12 +5,14 @@
 #include "..\vibe\vibe-background-sequential.h"
 #include <math.h>
 #include <string>
+#include "..\bg_fg_blobs\bg_fg_blobs.h"
 #include <sstream>
 using namespace cv;
 using namespace std;
 
 void processVideo(char* videoFilename);
 void detect(Mat const & src, vector<vector<Point>> contours);
+Mat hand_template_img;
 int main(int argc, char* argv[])
 {
 	namedWindow("Frame");
@@ -18,8 +20,8 @@ int main(int argc, char* argv[])
 
 	namedWindow("Hand Skin");
 
-	processVideo("./M2U00253.MPG");
-	//processVideo(0);
+	//processVideo("./M2U00253.MPG");
+	processVideo(0);
 	destroyAllWindows();
 	return EXIT_SUCCESS;
 }
@@ -95,7 +97,15 @@ void processVideo(char * videoFilename)
 			morphologyEx(segmentationMap, segmentationMap, MORPH_CLOSE, element);
 			imshow("Segmentation by ViBe", segmentationMap);
 			cvtColor(skin, skin, CV_BGR2GRAY);
-			findContours(skin, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
+			vector<Point> contour, second_contour;
+			segmentationMap.copyTo(hand_template_img);
+			
+			threshold(skin, skin, 0, 255, 0);
+			imshow("skin", skin);
+			refineSegments(Mat(), segmentationMap, hand_template_img, contour, second_contour, Point(-1, -1));
+			
+			imshow("hand_template_img",hand_template_img);
+			findContours(hand_template_img, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
 			detect(dst, contours);
 			imshow("Hand Skin", dst);
 		}

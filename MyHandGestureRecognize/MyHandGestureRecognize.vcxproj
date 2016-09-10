@@ -145,11 +145,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\bg_fg_blobs\bg_fg_blobs.cpp" />
     <ClCompile Include="..\skin_detect\skin_detect.cpp" />
     <ClCompile Include="..\vibe\vibe-background-sequential.c" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\bg_fg_blobs\bg_fg_blobs.h" />
     <ClInclude Include="..\skin_detect\skin_detect.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

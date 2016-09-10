@@ -27,9 +27,15 @@
     <ClCompile Include="..\skin_detect\skin_detect.cpp">
       <Filter>Source Files\skin-detect</Filter>
     </ClCompile>
+    <ClCompile Include="..\bg_fg_blobs\bg_fg_blobs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\skin_detect\skin_detect.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bg_fg_blobs\bg_fg_blobs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

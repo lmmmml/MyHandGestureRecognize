@@ -77,7 +77,7 @@ Mat GetSkin(Mat const &src) {
 			// apply hsv rule
 			bool c = R3(H, S, V);
 
-			if (!(b&&c))
+			if (!(a&&b&&c))
 				dst.ptr<Vec3b>(i)[j] = cblack;
 		}
 	}
